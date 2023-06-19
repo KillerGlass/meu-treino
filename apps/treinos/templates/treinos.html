@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+    <section class="breadcrumb-area set-bg" data-setbg="{% static 'img/blog/blog-bg.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-content">
+                        <h2>Planos de Treino</h2>
+                        <div class="links">
+                            <a href="{% url 'home' %}">Home</a>
+                            <a href="{% url 'treinos' %}" class="rt-breadcrumb">Treinos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <!-- Blog Section Begin -->
+    <section class="blog spad-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="single-blog-item">
+                        
+                        <div class="blog-text">
+                            <h2>Treino Costas e bisceps</h2>
+                            <ul>
+                                <li>Costas</li>
+                                <li>bisceps</li>
+                                <li>Musculação</li>
+                            </ul>
+                            
+                            <div class="blog-img set-bg" data-setbg="{% static 'img/blog/blog-1.jpg'%}">
+                                <div class="blog-time">
+                                    <h2>27 <span>Jan `19</span></h2>
+                                </div>
+                            </div>
+                            
+                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
+                                nulla pretium, vitae ornare leo.Aenean id auctor libero, gravida venenatis justo. Sed ut
+                                arcu nibh. Fusce lacinia arcu in ultrices finibus. Donec vestibulum imperdiet efficitur.
+                                Nam urna massa, elementum eu ullamcorper eget, condimentum sed eros. Vivamus consectetur
+                                massa sed dui hendrerit, ut consectetur augue porttitor. </p>
+                            <div class="posted-by">
+                                <div class="posted-by-img">
+                                    <img src="{% static 'img/blog/posted.png' %}" alt="">
+                                </div>
+                                <div class="posted-by-name">
+                                    <span>By Michael Smith</span>
+                                </div>
+                            </div>
+                            <a href="#" class="primary-btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="single-blog-item">
+                        
+                        <div class="blog-text">
+                            <h2>Why you should start training?</h2>
+                            <ul>
+                                <li>Pilates</li>
+                                <li>Yoga</li>
+                                <li>Fitness</li>
+                            </ul>
+                            
+                            <div class="blog-img set-bg" data-setbg="{% static 'img/blog/blog-2.jpg'%}">
+                                <div class="blog-time">
+                                    <h2>27 <span>Jan `19</span></h2>
+                                </div>
+                            </div>
+
+                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
+                                nulla pretium, vitae ornare leo.Aenean id auctor libero, gravida venenatis justo. Sed ut
+                                arcu nibh. Fusce lacinia arcu in ultrices finibus. Donec vestibulum imperdiet efficitur.
+                                Nam urna massa, elementum eu ullamcorper eget, condimentum sed eros. Vivamus consectetur
+                                massa sed dui hendrerit, ut consectetur augue porttitor. </p>
+                            <div class="posted-by">
+                                <div class="posted-by-img">
+                                    <img src="{% static 'img/blog/posted.png'%}" alt="">
+                                </div>
+                                <div class="posted-by-name">
+                                    <span>By Michael Smith</span>
+                                </div>
+                            </div>
+                            <a href="#" class="primary-btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="single-blog-item">
+                        
+                        <div class="blog-text">
+                            <h2>Why you should start training?</h2>
+                            <ul>
+                                <li>Pilates</li>
+                                <li>Yoga</li>
+                                <li>Fitness</li>
+                            </ul>
+                            
+                            <div class="blog-img set-bg" data-setbg="{% static 'img/blog/blog-3.jpg'%}">
+                                <div class="blog-time">
+                                    <h2>27 <span>Jan `19</span></h2>
+                                </div>
+                            </div>
+                            
+                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
+                                nulla pretium, vitae ornare leo.Aenean id auctor libero, gravida venenatis justo. Sed ut
+                                arcu nibh. Fusce lacinia arcu in ultrices finibus. Donec vestibulum imperdiet efficitur.
+                                Nam urna massa, elementum eu ullamcorper eget, condimentum sed eros. Vivamus consectetur
+                                massa sed dui hendrerit, ut consectetur augue porttitor. </p>
+                            <div class="posted-by">
+                                <div class="posted-by-img">
+                                    <img src="{% static 'img/blog/posted.png'%}" alt="">
+                                </div>
+                                <div class="posted-by-name">
+                                    <span>By Michael Smith</span>
+                                </div>
+                            </div>
+                            <a href="#" class="primary-btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="blob-pagination">
+                        <ul>
+                            <li><a class="active" href="#">01.</a></li>
+                            <li><a href="#">02.</a></li>
+                            <li><a href="#">03.</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
