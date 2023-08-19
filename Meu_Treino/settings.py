@@ -1,5 +1,8 @@
 from pathlib import Path
 import os
+import tempfile
+
+from django.conf import settings
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -18,11 +21,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'widget_tweaks',
+    'crispy_forms',
+    'crispy_bootstrap5',
+
     'apps.core',
     'apps.acounts',
     'apps.dietas',
     'apps.treinos',
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,6 +61,17 @@ TEMPLATES = [
         },
     },
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+}
+
 
 WSGI_APPLICATION = 'Meu_Treino.wsgi.application'
 
@@ -110,13 +131,16 @@ LOGOUT_REDIRECT_URL = 'login'
 
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DEFAULT_FROM_EMAIL = 'contato@devacademy.com'
+DEFAULT_FROM_EMAIL = ''
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'contato@devacademy.com'
-EMAIL_HOST_PASSWORD = 'ztyuodophslszhms'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 
-CONTACT_EMAIL = 'contato@devacademy.com'
+CONTACT_EMAIL = 'meutreinosupote@gmail.com'
+
+
+AUTH_USER_MODEL = "acounts.User"

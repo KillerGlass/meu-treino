@@ -22,6 +22,14 @@
     <link rel="stylesheet" href='{% static "css/barfiller.css"   %}'type="text/css">
     <link rel="stylesheet" href='{% static "css/slicknav.min.css" %}' type="text/css">
     <link rel="stylesheet" href='{% static "css/style.css" %}' type="text/css">
+
+
+    <script>
+        $(document).ready(function(){
+            $('[data-bs-toggle="tooltip"]').tooltip({ placement : "top" });   
+        });
+    </script>
+    
 </head>
 
 <body>
@@ -30,35 +38,76 @@
         <div class="loader"></div>
     </div>
     <!-- Header Section Begin -->
+    {% block header %}
     <header class="header-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="main-menu">
-                        <div class="logo">
-                            <!--<a href="index.html">
-                                <img src='{% static "img/logo.png" %}' alt="">
-                            </a>--> 
-                        
-                        </div>
+                    <div class="main-menu">     
+                        <nav class="navbar navbar-expand-lg ">
+                            <div class="footer-icon-img">
+                                <img src='{% static "img/footer-icon.png" %}' alt="">
+                            </div>
+                            <a class="navbar-brand " href="{% url 'home' %}">MeuTreino</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                            </button>
+                          
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                              <ul class="navbar-nav mr-auto">
+                            
+                                <li class="nav-item">
+                                  <a class="nav-link" href="{% url 'exercicios' %}">Exercícios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'treinos' %}">Treinos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'receitas' %}">Receitas</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'plano-dieta' %}">Dieta</a>
+                                </li>
 
-                        <nav class="mobile-menu">
-                            <ul>
-                                <li><a href="{% url 'home' %}">Home</a></li>
-                                <li><a href="{% url 'exercicios' %}">Exercícios</a></li>
-                                <li><a href="{% url 'treinos' %}">Treinos</a></li>
-                                <li><a href="#">Receitas</a></li>
-                                <li><a href="#">Dietas</a></li>
-                                <li><a href="{% url 'sobre-nos' %}">About us</a></li>
-                                <li><a href="{% url 'contato' %}">Contato</a></li>
-                                {% if request.user != None %}
-                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'sobre-nos' %}">Sobre</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'contato' %}">Contato</a>
+                                </li>
+                                {% if request.user.is_authenticated %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Perfil
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a>
+                                      <a class="dropdown-item" href="{% url 'exercicios-user' %}">Meus Exercícios</a>
+                                      <a class="dropdown-item" href="{% url 'treinos-user' %}">Meus Treinos</a>
+                                      <a class="dropdown-item" href="{% url 'receitas-user' %}">Minhas Receitas</a>
+                                      <a class="dropdown-item" href="{% url 'plano-dieta' %}">Plano de Dieta</a>
+                                      <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+                                    </div>
+                                  </li>
+                                    
                                 {% else %}
-                                    <li><a href="{% url 'logout' %}">Perfil</a></li>
-                                {% endif %}
-                                <li class="search-btn search-trigger"><i class="fa fa-search"></i></li>
-                            </ul>
-                        </nav> 
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Login
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                                      <a class="dropdown-item" href="{% url 'cadastro-user' %}">Registre-se</a>
+                                    </div>
+                                  </li>
+                                  {% endif %}
+
+                              </ul>
+                           
+                            </div>
+                          </nav> 
+
                         <div id="mobile-menu-wrap"></div>
                     </div>
                 </div>
@@ -66,42 +115,27 @@
         </div>
     </header>
 
-
-    <section class="search-bar-wrap">
-        <span class="search-close"><i class="fa fa-close"></i></span>
-        <div class="search-bar-table">
-            <div class="search-bar-tablecell">
-                <div class="search-bar-inner">
-                    <h2>Search</h2>
-                    <form action="#">
-                        <input type="search" placeholder="Type Keywords">
-                        <button type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
     
+    {% endblock %}
+
     {% block main %}  
         
-        
-    {% endblock %}
+    {% endblock %}      
+   
+
+    {% block footer %}
 
     <footer class="footer-section set-bg" data-setbg='{% static "img/footer-bg.jpg"%}'>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="footer-content">
-                        <div class="footer-logo">
-                            <a href="#"><img src='{% static "img/logo.png" %}' alt=""></a>
-                        </div>
                         <div class="footer-menu">
                             <ul>
                                 <li><a href="{% url 'home' %}">Home</a></li>
-                                <li><a href="#">Exercicios</a></li>
-                                <li><a href="#">Treinos</a></li>
-                                <li><a href="#">Dietas</a></li>
-                                <li><a href="#">Perfil</a></li>
+                                <li><a href="{% url 'exercicios' %}">Exercicios</a></li>
+                                <li><a href="{% url 'treinos' %}">Treinos</a></li>
+                                <li><a href="{% url 'receitas' %}">Dietas</a></li>
                                 <li><a href="{% url 'sobre-nos' %}">About us</a></li>
                                 <li><a href="{% url 'contato' %}">Contato</a></li>
                             </ul>
@@ -130,6 +164,8 @@
         </div>
     </footer>
     <!-- Footer Section End -->
+    
+    {% endblock %}
 
     <!-- Js Plugins -->
     <script src='{% static "js/jquery-3.3.1.min.js"         %}' ></script>
@@ -140,6 +176,9 @@
     <script src='{% static "js/circle-progress.min.js"      %}'></script>
     <script src='{% static "js/jquery.barfiller.js"         %}'></script>
     <script src='{% static "js/main.js"                     %}'></script>
+
+  
+ 
 
 </body>
 

@@ -5,35 +5,25 @@
 {% block main %}
     <!-- Search Bar End -->
     <!-- Top Social Begin -->
-    <div class="top-social">
-        <div class="top-social-links">
-            <ul>
-                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-            </ul>
-        </div>
-    </div>
+  
     <!-- Top Social End -->
     <!-- Hero Slider Section Begin -->
     <section class="hero-slider">
         <div class="slide-items owl-carousel">
             <div class="single-slide set-bg active" data-setbg="{% static 'img/bg.jpg' %}">
                 <a href="https://www.youtube.com/watch?v=SEVuD_djKrU" class="play-btn pop-up"><i class="fa fa-play"></i></a>
-                <h1>Be Fit.Top Gym</h1>
-                <a href="#" class="primary-btn">Read More</a>
+                <h1>Meu Treino</h1>
+                <a href="#" class="primary-btn">Ver Mais</a>
             </div>
             <div class="single-slide set-bg" data-setbg= "{% static 'img/bg-2.jpg' %}">
                 <a href="https://www.youtube.com/watch?v=SEVuD_djKrU" class="play-btn pop-up"><i class="fa fa-play"></i></a>
-                <h1>Be Fit.Top Trainer</h1>
-                <a href="#" class="primary-btn">Read More</a>
+                <h1>Planos de Treino</h1>
+                <a href="{% url 'treinos' %}" class="primary-btn">Ver Mais</a>
             </div>
             <div class="single-slide set-bg" data-setbg="{% static 'img/bg-3.jpg' %}">
                 <a href="https://www.youtube.com/watch?v=SEVuD_djKrU" class="play-btn pop-up"><i class="fa fa-play"></i></a>
-                <h1>Be Fit.Top Body</h1>
-                <a href="#" class="primary-btn">Read More</a>
+                <h1>Planos de dieta</h1>
+                <a href="{% url 'receitas' %}" class="primary-btn">Ver Mais</a>
             </div>
         </div>
     </section>
@@ -43,6 +33,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
+                    <a href="{% url 'exercicios' %}">
                     <div class="single-features">
                         <div class="features-img">
                             <img src="{% static 'img/features/feature-1.jpg'%}" alt="">
@@ -51,13 +42,14 @@
                             <div class="feature-icon">
                                 <img src="{% static 'img/features/icon-1.png'%}" alt="">
                             </div>
-                            <h5>Amazing Setting</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
+                            <h5>Exercicios</h5>
+                            <p>Uma ampla gama de exercicios para te auxiliar a montar treinos de alto desempenho.</p>
                         </div>
                     </div>
+                    </a>
                 </div>
                 <div class="col-md-4">
+                    <a href="{% url 'treinos' %}">
                     <div class="single-features">
                         <div class="features-img">
                             <img src="{% static 'img/features/feature-2.jpg'%}" alt="">
@@ -66,25 +58,26 @@
                             <div class="feature-icon">
                                 <img src="{% static 'img/features/icon-2.png'%}" alt="">
                             </div>
-                            <h5>Best Trainers</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
+                            <h5>Planos de Treino</h5>
+                            <p>Uma ampla series de Planos de Treinos, que vao te ajudar a conquistar seus objetivos e evoluir seu corpo.</p>
                         </div>
                     </div>
                 </div>
+                </a>
                 <div class="col-md-4">
                     <div class="single-features">
+                        <a href="{% url 'plano-dieta' %}">
                         <div class="features-img">
-                            <img src="{% static 'img/features/feature-3.jpg'%}" alt="">
+                            <img src="{% static 'img/planodieta.jpeg'%}" alt="">
                         </div>
                         <div class="feature-text">
                             <div class="feature-icon">
                                 <img src="{% static 'img/features/icon-3.png'%}" alt="">
                             </div>
-                            <h5>Diet Plans</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
+                            <h5>Planos de Dietas</h5>
+                            <p>Crie planos de dieta personalizados para evoluir ainda mais o seu corpo.</p>
                         </div>
+                    </a>
                     </div>
                 </div>
             </div>
@@ -98,7 +91,7 @@
                 <div class="col-lg-12 text-center">
                     <div class="section-title">
                         <span>Features</span>
-                        <h2>Services</h2>
+                        <h2>Exercícios</h2>
                     </div>
                 </div>
             </div>
@@ -138,117 +131,11 @@
             </div>
             <div class="row p-70">
                 <div class="col-lg-12 text-center">
-                    <a href="#" class="service-btn primary-btn">see all the services</a>
+                    <a href="{% url 'exercicios' %}" class="service-btn primary-btn">Ver todos exercicios</a>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Services Section End -->
-    <!-- Trainer Section Begin -->
-    <section class="trainer-section set-bg" data-setbg="{% static   'img/trainer-bg.jpg'%}">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="section-title">
-                        <span>The Best</span>
-                        <h2>Trainers</h2>
-                        <a href="#" class="primary-btn trainer-btn">See All</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="single-trainer">
-                        <div class="trainer-img">
-                            <img src="{% static 'img/trainer/trainer-1.jpg'%}" alt="">
-                            <div class="img-hover">
-                                <a href="#"><i class="fa fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="trainer-text">
-                            <h5>Rachel Smith <span>Aerobics Instructor</span></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-trainer">
-                        <div class="trainer-img">
-                            <img src="{% static 'img/trainer/trainer-2.jpg'%}" alt="">
-                            <div class="img-hover">
-                                <a href="#"><i class="fa fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="trainer-text">
-                            <h5>Micheal Williams <span>Aerobics Instructor</span></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-trainer">
-                        <div class="trainer-img">
-                            <img src="{% static 'img/trainer/trainer-3.jpg'%}" alt="">
-                            <div class="img-hover">
-                                <a href="#"><i class="fa fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="trainer-text">
-                            <h5>James Brown <span>Aerobics Instructor</span></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Traniner Section End -->
-    <!-- Upcoming Event Begin -->
-    <section class="upcoming-event-section spad-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="upcoming-classes">
-                        <div class="up-title">
-                            <span>Next</span>
-                            <h5>Upcomming Classes</h5>
-                        </div>
-                        <ul class="classes-time">
-                            <li><img src="{% static 'img/stopwatch.png'%}" alt=""> Gym Fitness <span>11:00 - 12:00</span></li>
-                            <li><img src="{% static 'img/stopwatch.png'%}" alt=""> Pilates <span>12:00 - 13:00</span></li>
-                            <li><img src="{% static 'img/stopwatch.png'%}" alt=""> Spinning <span>13:00 - 14:00</span></li>
-                            <li><img src="{% static 'img/stopwatch.png'%}" alt=""> Yoga <span>14:00 - 15:00</span></li>
-                            <li><img src="{% static 'img/stopwatch.png'%}" alt=""> Gym Fitness <span>15:00 - 16:00</span></li>
-                            <li><img src="{% static 'img/stopwatch.png'%}" alt=""> Pilates <span>16:00 - 17:00</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="membership-card set-bg" data-setbg="{% static 'img/m-card.jpg'%}">
-                        <div class="membership-details">
-                            <div class="up-title">
-                                <span>Next</span>
-                                <h5>Membership Cards</h5>
-                            </div>
-                            <div class="discount">
-                                <h1>25% <span>Discount</span></h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="member-sign-up set-bg" data-setbg="{% static 'img/signup-bg.'%}jpg">
-                        <div class="up-title">
-                            <span>New</span>
-                            <h5>Personal Trainer</h5>
-                        </div>
-                        <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
-                            pretium.Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl
-                            quis nulla pretium.</p>
-                        <div class="member-signup-btn">
-                            <a href="#" class="primary-btn">Sign up Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  
     
 {% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block main %}
+
+
+    <section class="breadcrumb-area set-bg" data-setbg="{% static 'img/dieta_page.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-content">
+                        <h2>{{pagina}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <section class="classes-section ">
+        <div class="container" style="margin-top:50px; margin-bottom:150px;">
+            
+            <div class="text-center">
+                <h2>{{ titulo }}</h2>
+            </div>
+            <br>
+            
+            <form method="post" enctype="multipart/form-data">
+                
+                {% csrf_token %}
+
+                {% for field in form %}
+            
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">{{field.label}}</label>
+                        {% render_field field placeholder=field.label class="form-control" %}
+                    
+                    {{field.errors}}
+                    </div>
+                </div>
+                
+                {% endfor %}
+    
+                <div class="mt-5 text-center">
+                    <button class="btn btn-lg btn-danger" onclick="window.open(document.referrer,'_self');return false">Cancelar</button>
+                    <button class="btn btn-lg btn-primary" type="submit">{{ botao }}</button>    
+                </div>
+            </form>
+        </div>
+    </section>
+
+{% endblock%}

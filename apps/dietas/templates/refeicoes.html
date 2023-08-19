@@ -1,0 +1,102 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+<section class="breadcrumb-area set-bg" data-setbg="{% static 'img/dieta_page.jpg'%}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb-content">
+                    <h2>Refeições</h2>
+                    <a href="{% url 'refeicao-create' %}">
+                        <button type="button" class="btn btn-primary">Cadastrar Refeicões</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="light">
+	<div class="container py-2">
+		<div class="h1 text-center text-dark" id="pageHeaderTitle">Receitas</div>
+
+		{% for i in messages %}
+		<div class="alert alert-primary fade show alert-dismissible text-center" role="alert">
+			{{ i }}
+		</div>
+		{% endfor %}
+
+		{% for receita in object_list %}
+		<article class="postcard light blue">
+			<a class="postcard__img_link" href="{% url 'receitas-detail' receita.pk %}">
+				{% if receita.img %}
+				<img class="postcard__img" src="{{receita.img.url}}" alt="Image Title" />
+				{% else %}
+				<img class="postcard__img" src="{% static 'img/refeicao.jpg' %}" alt="Image Title" />
+				{% endif %}
+			</a>
+			<div class="postcard__text t-dark">
+				<h1 class="postcard__title blue"><a href="{% url 'receitas-detail' receita.pk %}">{{receita.nome}}</a></h1>
+				<div class="postcard__subtitle small">
+					<time datetime="2020-05-25 12:00:00">
+						<i class="fas fa-calendar-alt mr-2"></i>Criador: {{receita.user}}
+					</time>
+				</div>
+				<div class="postcard__bar"></div>
+				<div class="postcard__preview-txt">Uma ótima receita para seu {{receita.categoria}}. </div>
+				<ul class="postcard__tagbox">
+					<li class="tag__item"><i class="fas fa-clock mr-2"></i>Calorias: {{receita.calorias}} kcal</li>
+					<li class="tag__item"><i class="fas fa-clock mr-2"></i>tempo de preparo: {{receita.tempo_preparo}}</li>
+					<li class="tag__item"><i class="fas fa-clock mr-2"></i>Categoria: {{receita.categoria}}</li>
+					
+				</ul>
+			</div>
+		</article>
+		{% empty%}
+
+		<article class="postcard light blue">
+			<h1>Nenhuma Receita encontrada :( </h1>
+		</article>
+
+
+		{% endfor%}
+		
+		<section>
+		
+
+
+		{% if object_list %}
+		  <nav aria-label="Navegação de página exemplo">
+			<ul class="pagination justify-content-center">
+				{% if page_obj.has_previous %}
+				<li class="page-item disabled">
+					<a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+				</li>
+				{% endif %}
+			  	{% for page in paginator.page_range %}
+					{% if page == page_obj.number %}
+						<li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+					{% else %}
+						<li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+					{% endif %}
+			
+		  	  	{%endfor%} 
+				{% if page_obj.has_next %}
+					<li class="page-item">
+						<a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next"><span aria-hidden="true">»</span></a>
+					</li>
+				{% endif %}
+			</ul>
+		  </nav>
+		  
+		{% endif %}
+		</section>
+		<br>
+	</div>
+</section>
+            
+		
+{% endblock %}

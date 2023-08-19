@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+<section class="breadcrumb-area set-bg" data-setbg="{% static 'img/classes/classes-bg.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-content">
+                        <h2>Exercícios</h2>
+                        <a href="{% url 'exercicios-create' %}">
+                            <button type="button" class="btn btn-primary">Cadastrar Exercício</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+<section class="classes-section ">
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <h1 class="my-4">
+        {{object.nome}}
+    </h1>
+  
+    <!-- Portfolio Item Row -->
+    <div class="row">
+        
+        {% if object.video %}
+        <div class="col-md-8">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="{{object.video}}" title="YouTube video player" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        {% else %}
+        <div class="col-md-8">
+            {% if exercicios.img %}
+                <img class="img-fluid" src="{{object.img.url}}" alt="">
+            {% else%}
+                <img class="img-fluid exercicio-image" src="{% static 'img/classes/classes-2.jpg'%}" alt="">
+            {% endif%}
+          </div>
+        {% endif %}
+        
+        <div class="col-md-4 project-details">
+            <h3 class="my-3">Instruções de Execução</h3>
+            <ul>
+            <li>Numero de series: {{object.num_series}}</li>
+            <li>Numero de Repetições: {{object.num_repeticoes}}</li>
+            <li>Tempo de Descanço: {{object.descanco}}</li>
+            </ul>
+            {% if request.user == object.user%}
+            <br>
+            <br>
+            <a href="{% url 'exercicios-update' object.pk  %}?next={{ request.path }}">
+                <button type="button" class="btn btn-outline-primary">Editar</button>
+            </a>
+            <a href="{% url 'exercicios-delete' object.pk  %}">
+                <button type="button" class="btn btn-outline-danger">Excluir</button>
+            </a>
+        {% endif %} 
+        </div>
+  
+    </div>
+    <!-- /.row -->
+    
+    {% if object.descricao %}
+        <h3 class="my-4 related-projects">Descricão</h3>
+        <p>{{object.descricao}}</p>
+    
+    {% endif %}
+   
+    <section class="classes-section ">
+
+    <!-- Related Projects Row -->
+    <h3 class="my-4 related-projects">Exercícios Relacionadoss</h3>
+      <div class="container">
+      <div class="row">
+          {% for exercicios in object_list%}
+          <a href="{% url 'exercicios-detail' exercicios.pk %}">
+          <div class="col-md-3 equal-size">
+              <div class="card-sl">
+                  {% if exercicios.img %}
+                      <div class="card-image">
+                          <img src="{{ exercicios.img.url }}" alt="{{exercicios.nome}}">
+                      </div>
+                  {% else%}
+                      <div class="card-image">
+                          <img src="{% static 'img/classes/classes-2.jpg'%}" alt="">
+                      </div>
+                  {% endif%}
+
+                  <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
+                  <div class="card-heading">
+                      {{exercicios.nome}}
+                  </div>
+                  <div class="card-text">
+                      Criador: {{exercicios.user}}
+                      {% if request.user == exercicios.user%}
+                          <br>
+                          <br>
+                          <a href="{% url 'exercicios-update' exercicios.pk  %}">
+                              <button type="button" class="btn btn-outline-primary">Editar</button>
+                          </a>
+                          <a href="{% url 'exercicios-delete' exercicios.pk  %}">
+                              <button type="button" class="btn btn-outline-danger">Excluir</button>
+                          </a>
+                      {% endif %}
+                  </div>
+              </div>
+              
+          </div>
+          </a>
+          {% empty %}
+          
+          <h4 class="fw-light text-center">
+              Nennhum Exercício Encontrado :(
+          </h4>
+          
+          {% endfor %}
+
+      </div>
+  </section>
+    <!-- /.row -->
+  
+  </div>
+</section>
+
+{% endblock %}

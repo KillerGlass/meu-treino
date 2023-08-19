@@ -10,10 +10,16 @@
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb-content">
                         <h2>Exercícios</h2>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'exercicios-create' %}">
+                            <button type="button" class="btn btn-primary">Cadastrar Exercício</button>
+                        </a>
+                        {% else %}
                         <div class="links">
                             <a href="{% url 'home' %}">Home</a>
-                            <a href="{% url 'exercicios' %}" class="rt-breadcrumb">Exercícios</a>
+                            <a href="{% url 'exercicios' %}" class="rt-breadcrumb">Exercicios</a>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -21,156 +27,91 @@
     </section>
     <!-- Breadcrumb Section End -->
     <!-- Classes Section Begin -->
-    <section class="classes-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-classes">
-                        <div class="classes-img">
-                            <img src="{% static 'img/classes/classes-1.jpg'%}" alt="">
-                        </div>
-                        <div class="classes-text">
-                            <h5>Pilates</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
-                        </div>
-                    </div>
+    <section class="classes-section ">
+        <div class="container" style="margin-top:50px;">
+            <div class="mt-4 container text-center">
+                {% for i in messages %}
+                <div class="alert alert-primary fade show alert-dismissible" role="alert">
+                    {{ i }}
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-classes">
-                        <div class="classes-img">
+            {% endfor %}
+        <div class="row">
+            {% for exercicios in object_list%}
+            <a href="{% url 'exercicios-detail' exercicios.pk %}">
+            <div class="col-md-3 equal-size">
+                <div class="card-sl">
+                    {% if exercicios.img %}
+                        <div class="card-image">
+                            <img src="{{ exercicios.img.url }}" alt="{{exercicios.nome}}">
+                        </div>
+                    {% else%}
+                        <div class="card-image">
                             <img src="{% static 'img/classes/classes-2.jpg'%}" alt="">
                         </div>
-                        <div class="classes-text">
-                            <h5>Body Building</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
-                        </div>
+                    {% endif%}
+
+                    <a class="card-action" href="#"><i class="fa fa-heart"></i></a>
+                    <div class="card-heading">
+                        {{exercicios.nome}}
+                    </div>
+                    <div class="card-text">
+                        Criador: {{exercicios.user}}
+                        {% if request.user == exercicios.user%}
+                            <br>
+                            <br>
+                            <a href="{% url 'exercicios-update' exercicios.pk  %}">
+                                <button type="button" class="btn btn-outline-primary">Editar</button>
+                            </a>
+                            <a href="{% url 'exercicios-delete' exercicios.pk  %}">
+                                <button type="button" class="btn btn-outline-danger">Excluir</button>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-classes">
-                        <div class="classes-img">
-                            <img src="{% static 'img/classes/classes-3.jpg'%}" alt="">
-                        </div>
-                        <div class="classes-text">
-                            <h5>Fitness</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-classes">
-                        <div class="classes-img">
-                            <img src="{% static 'img/classes/classes-4.jpg'%}" alt="">
-                        </div>
-                        <div class="classes-text">
-                            <h5>Yoga</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-classes">
-                        <div class="classes-img">
-                            <img src="{% static 'img/classes/classes-5.jpg'%}" alt="">
-                        </div>
-                        <div class="classes-text">
-                            <h5>Trx</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-classes">
-                        <div class="classes-img">
-                            <img src="{% static 'img/classes/classes-6.jpg'%}" alt="">
-                        </div>
-                        <div class="classes-text">
-                            <h5>Spinning</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
+            </a>
+            {% empty %}
+            
+            <h4 class="fw-light text-center">
+                Nennhum Exercício Encontrado :(
+            </h4>
+            
+            {% endfor %}
+
         </div>
-    </section>
-    <!-- Classes Section End -->
-    <!-- Fitness Plan Begin -->
-    <section class="fitness-section inside-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-md-6">
-                    <div class="single-fitness-feature">
-                        <div class="fitness-number">
-                            <span>01</span>
-                        </div>
-                        <div class="fitness-text">
-                            <h4>Get fitted</h4>
-                            <p>Arcu a tellus pellentesque ultrices. Ut euismod luctus elit id eleifend. Donec semper
-                                massa a imperdiet mattis. </p>
-                        </div>
-                    </div>
-                    <div class="single-fitness-feature">
-                        <div class="fitness-number">
-                            <span>02</span>
-                        </div>
-                        <div class="fitness-text">
-                            <h4>Try Pilates</h4>
-                            <p>Ut euismod luctus elit id eleifend. Donec semper massa a imperdiet mattis. In vel mattis
-                                neque, nec ultricies lectus. </p>
-                        </div>
-                    </div>
-                    <div class="single-fitness-feature">
-                        <div class="fitness-number">
-                            <span>03</span>
-                        </div>
-                        <div class="fitness-text">
-                            <h4>Healthy Diet</h4>
-                            <p>Arcu a tellus pellentesque ultrices. Ut euismod luctus elit id eleifend. Donec semper
-                                massa a imperdiet mattis. </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-6 offset-lg-2 text-md-right text-left">
-                    <div class="single-fitness-feature">
-                        <div class="fitness-number left-number">
-                            <span>04</span>
-                        </div>
-                        <div class="fitness-text left-text">
-                            <h4>Meditation</h4>
-                            <p>Arcu a tellus pellentesque ultrices. Ut euismod luctus elit id eleifend. Donec semper
-                                massa a imperdiet mattis. </p>
-                        </div>
-                    </div>
-                    <div class="single-fitness-feature">
-                        <div class="fitness-number left-number">
-                            <span>05</span>
-                        </div>
-                        <div class="fitness-text left-text">
-                            <h4>Diet Plan</h4>
-                            <p>Ut euismod luctus elit id eleifend. Donec semper massa a imperdiet mattis. In vel mattis
-                                neque, nec ultricies lectus. </p>
-                        </div>
-                    </div>
-                    <div class="single-fitness-feature">
-                        <div class="fitness-number left-number">
-                            <span>06</span>
-                        </div>
-                        <div class="fitness-text left-text">
-                            <h4>Grow Muscles</h4>
-                            <p>Arcu a tellus pellentesque ultrices. Ut euismod luctus elit id eleifend. Donec semper
-                                massa a imperdiet mattis. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
+
+        {% if object_list %}
+        <ul class="pagination pagination-circle justify-content-center pt-4">
+            
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">«</span></a>
+                </li>
+            {% endif %}
+            {% for page in paginator.page_range %}
+                {% if page == page_obj.number %}
+                    <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+                {% endif %}
+            
+            {%endfor%}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next"><span aria-hidden="true">»</span></a>
+                </li>
+            {% endif %}
+            
+        </ul>
+
+        {% endif %}
+
+
+    </section>         
+
     <!-- Fitness Plan End -->
     <!-- Classes Call To Action Section -->
     <section class="classes-callto-section set-bg" data-setbg="{% static 'img/classes/classes-callto-bg.jpg' %}">
@@ -178,11 +119,12 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="classes-callto-text">
-                        <span>Join our gym now!</span>
-                        <h2>25% Discount</h2>
-                        <p>Arcu a tellus pellentesque ultrices. Ut euismod luctus elit id eleifend. Donec semper massa a
-                            imperdiet mattis. </p>
-                        <a href="#" class="primary-btn">Join</a>
+                        <span>Crie seu Plano de treino personalizado!</span>
+                        
+                        <p>Nossa plataforma possui uma serie de exercicios explicados passo a passo de forma didatica
+                            com eles voce pode criar um plano de treino personalizado, que ira te auxiliar a conquistar seus objetivos e metas.
+                        </p>
+                        <a href="{% url 'treinos' %}" class="primary-btn">Treinos</a>
                     </div>
                 </div>
             </div>

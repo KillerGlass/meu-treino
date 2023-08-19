@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %} 
+
+{% block main %}
+
+
+<section class="breadcrumb-area set-bg" data-setbg="{% static 'img/blog/blog-bg.jpg'%}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb-content">
+                    <h2>{{treino.nome}}</h2>
+                    {% if request.user == treino.user %}
+                    <a href="{% url 'treinos-delete' treino.pk %}">
+                        <button type="button" class="btn btn-danger"> Excluir Treino</button>
+                    </a>
+                    <a href="{% url 'treinos-detail' treino.pk %}">
+                        <button type="button" class="btn btn-primary"> Ver Treino</button>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if messages %}
+    <div class="container">
+        <div class="row">
+            <div class="mt-4 container text-center">
+            {% for i in messages %}
+                <div class="alert alert-primary fade show alert-dismissible" role="alert">
+                    {{ i }}
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+<section class="classes-section ">
+    <div class="container" style="margin-top:50px;">
+        <div class="row">
+            <div class="col-sm">
+                <div class="text-center">
+                    <h2>{{ titulo }}</h2>
+                </div>
+                <br>
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+
+                    <div class="text-center">                
+                        <button class="btn btn-lg btn-danger" onclick="window.open(document.referrer,'_self');return false">Cancelar</button>
+                        <button class="btn btn-lg btn-primary" type="submit">{{ botao }}</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm">
+                <div class="text-center">
+                    <h2>Exercicios Do Treinos</h2>
+                </div>
+                <br>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Exercicio</th>
+                            <th scope="col">Series</th>
+                            <th scope="col">Repetições</th>
+                            <th scope="col">Descanço</th>
+                            <th>
+                                <a href="{% url 'treinos-create-exercicios' treino.pk %}?next={{ request.path }}" style="color: white;" aria-label="erewed"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                              </svg></a>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for exercicio in exercicios%}
+                                <tr>
+                                <th><a href="{% url 'exercicios-detail' exercicio.pk %}" style="color: rgb(43, 43, 43);">{{ exercicio.nome}}</a></th>
+                                <th>{{ exercicio.num_series}}</th>
+                                <td>{{exercicio.num_repeticoes}}</td>
+                                <td>{{exercicio.descanco}}</td>
+                                <td>
+                                    <a href="{% url 'treinos-exercicios-delete' treino.pk  exercicio.pk %}?next={{ request.path }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                  </svg></a>
+                                </tr>
+                                </td>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  </table>
+                  
+                  
+            </div>
+        
+        
+        </div>
+    </div>
+</section>
+
+{% endblock%}
